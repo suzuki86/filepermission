@@ -31,4 +31,28 @@ module Filepermission
     end
     octal.join("").to_i
   end
+
+  def self.convert_to_symbol(octal)
+    sym = []
+    3.times do |i|
+      if octal.to_s[i] === "7" then
+        sym << "rwx"
+      elsif octal.to_s[i] === "6" then
+        sym << "rw-"
+      elsif octal.to_s[i] === "5" then
+        sym << "r-x"
+      elsif octal.to_s[i] === "4" then
+        sym << "r--"
+      elsif octal.to_s[i] === "3" then
+        sym << "-wx"
+      elsif octal.to_s[i] === "2" then
+        sym << "-w-"
+      elsif octal.to_s[i] === "1" then
+        sym << "--x"
+      elsif octal.to_s[i] === "0" then
+        sym << "---"
+      end
+    end
+    sym.join("")
+  end
 end
